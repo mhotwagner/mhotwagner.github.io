@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Hotwagner's Portfolio</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        /* Terminal Theme Styles */
+        em { font-style: unset; }
+        body {
+            background-color: #1d1f21;
+            color: #c5c8c6;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: #282a2e;
+            color: #8abeb7;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a {
+            color: #8abeb7;
+            text-decoration: none;
+        }
+
+        nav ul li em {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            width: 1ch;
+            margin-right: 1.5ch;
+            transition: width 0.3s ease, margin-right 0.3s ease;
+            vertical-align: bottom;
+        }
+
+        nav ul li em:hover {
+            width: 2ch;
+            margin-right: .5ch;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+
+        footer {
+            background: #282a2e;
+            color: #8abeb7;
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        section {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .info::after {
+            content: "_";
+            text-decoration: blink;
+            transition: 0.25s ease;
+        }
+</style>
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li class="current">
+                <em>$/</em>
+                <a href="index.html">Home</a></li>
+            <li>
+                <em>$/</em>
+                <a href="about.html">About</a></li>
+            <li>
+                <em>$/</em>
+                <a href="resume.html">Resume</a></li>
+            <li>
+                <em>$/</em>
+                <a href="projects.html">Projects</a></li>
+            <li>
+                <em>$/</em>
+                <a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section>
+        <p class="info">I'm Michael Hotwagner, a full stack software engineer with over a decade of experience designing, developing, and implementing functional and elegant solutions to interesting problems. With expertise spanning the stack, from infrastructure through the backend up to the frontend, I have a proven ability to work with clients from design through development and implementation to efficiently deliver excellent products. Explore my projects, experience, and skills to see how I can help bring your next big idea to life.</p>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Michael Hotwagner</p>
+</footer>
+</body>
+</html>
