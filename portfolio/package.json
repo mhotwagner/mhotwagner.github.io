@@ -8,7 +8,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "deploy": "gh-pages -d dist"
   },
   "jest": {
     "preset": "jest-expo"
@@ -16,6 +17,7 @@
   "dependencies": {
     "@expo-google-fonts/space-mono": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
+    "@expo/webpack-config": "^19.0.1",
     "@react-navigation/native": "^6.0.2",
     "expo": "~51.0.18",
     "expo-font": "~12.0.7",
