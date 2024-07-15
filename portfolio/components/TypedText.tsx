@@ -4,7 +4,8 @@ import { Text, View, StyleSheet } from 'react-native';
 interface TypedTextProps {
     text: string;
     style?: any;
-    textStyle?: any
+    textStyle?: any;
+    caretStyle?: any;
     delay?: number;
     speed?: number;
     caretCharacter?: string;
@@ -17,6 +18,7 @@ const TypedText: React.FC<TypedTextProps> = (
         text,
         style,
         textStyle,
+        caretStyle,
         delay = 0,
         speed = 100,
         caretCharacter = '$',
@@ -25,6 +27,9 @@ const TypedText: React.FC<TypedTextProps> = (
     }) => {
     const [displayedText, setDisplayedText] = useState(' ');
     const [showCaret, setShowCaret] = useState(false);
+    if (caretStyle === undefined) {
+        caretStyle = textStyle;
+    }
     // const [cursorVisible, setCursorVisible] = useState(false);
 
     useEffect(() => {
@@ -58,7 +63,7 @@ const TypedText: React.FC<TypedTextProps> = (
 
     return (
         <View style={[styles.container, style]}>
-            { showCaret && <Text style={[styles.outputCaret, textStyle]}>{caretCharacter}</Text> }
+            { showCaret && <Text style={[styles.outputCaret, caretStyle]}>{caretCharacter}</Text> }
             <Text style={textStyle}>{displayedText}</Text>
         </View>
     );

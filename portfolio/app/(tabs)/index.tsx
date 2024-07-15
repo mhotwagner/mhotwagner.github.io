@@ -2,16 +2,28 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, Dimensions} from 'react-native';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import About from "@/components/About";
 
 const moveMouseGlow = (e: any) => {
 
 }
 export default function Home() {
     const [mouseGlowPosition, setMouseGlowPosition] = useState({x: 0, y: 0});
+    const [topFadeMouseGlowPosition, setTopFadeMouseGlowPosition] = useState({x: 0, y: 0});
     const moveMouseGlow = (e: any) => {
         const x = e.clientX - 300;
         const y = e.clientY - 300;
         setMouseGlowPosition({x, y});
+        // position in top fade element
+        const topFade = document.getElementById('topFade');
+        if (topFade) {
+            const topFadeRect = topFade.getBoundingClientRect();
+            // console.log(topFadeRect)
+            const topFadeX = e.clientX - topFadeRect.left - 300;
+            const topFadeY = e.clientY - topFadeRect.top - 300;
+            // console.log(x, y);
+            setTopFadeMouseGlowPosition({x: topFadeX, y: topFadeY})
+        }
     }
     return (
         <View style={styles.outerContainer} onPointerMove={moveMouseGlow}>
@@ -23,17 +35,25 @@ export default function Home() {
                     <Header style={styles.header}/>
                 </View>
                 <View style={styles.contentWrapper}>
-                    <ScrollView contentContainerStyle={styles.contentContainer} showsVerticalScrollIndicator={false}>
+                    {/*<View style={[styles.contentFade, styles.topFade]} id="topFade">*/}
+                    {/*    /!*<View style={[styles.mouseGlow as any, {left: topFadeMouseGlowPosition.x, top: topFadeMouseGlowPosition.y}]}/>*!/*/}
+                    {/*</View>*/}
+                    <ScrollView
+                        contentContainerStyle={styles.contentContainer}
+                        showsVerticalScrollIndicator={false}
+                    >
+                        <View id="spacer" style={styles.spacer}/>
                         <View id="about" style={styles.section}>
-                            <Text style={styles.title}>About</Text>
-                            <Text style={styles.description}>
-                                I'm a fullstack software engineer with over a decade of experience designing,
-                                developing, and implementing functional and elegant solutions to interesting problems.
-                                With expertise spanning the stack, from infrastructure through the backend up to the
-                                frontend, I have a proven ability to work with clients from design through development
-                                and implementation to efficiently deliver excellent products. Explore my projects,
-                                experience, and skills to see how I can help bring your next big idea to life.
-                            </Text>
+                            {/*<Text style={styles.title}>About</Text>*/}
+                            {/*<Text style={styles.description}>*/}
+                            {/*    I'm a fullstack software engineer with over a decade of experience designing,*/}
+                            {/*    developing, and implementing functional and elegant solutions to interesting problems.*/}
+                            {/*    With expertise spanning the stack, from infrastructure through the backend up to the*/}
+                            {/*    frontend, I have a proven ability to work with clients from design through development*/}
+                            {/*    and implementation to efficiently deliver excellent products. Explore my projects,*/}
+                            {/*    experience, and skills to see how I can help bring your next big idea to life.*/}
+                            {/*</Text>*/}
+                            <About />
                         </View>
                         <View id="resume" style={styles.section}>
                             <Text style={styles.title}>Resume</Text>
@@ -69,6 +89,9 @@ export default function Home() {
                             </Text>
                         </View>
                     </ScrollView>
+                    {/*<View style={[styles.contentFade, styles.bottomFade]} id="bottomFade">*/}
+                    {/*    /!*<View style={[styles.mouseGlow as any, {left: topFadeMouseGlowPosition.x, top: topFadeMouseGlowPosition.y}]}/>*!/*/}
+                    {/*</View>*/}
                 </View>
             </View>
             <Footer style={styles.footer}/>
@@ -80,6 +103,7 @@ const styles = StyleSheet.create({
     outerContainer: {
         flex: 1,
         justifyContent: 'space-between',
+        // height: "100%"
     },
     background: {
         backgroundColor: '#0a192f',
@@ -101,29 +125,47 @@ const styles = StyleSheet.create({
     pageContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         flex: 1,
     },
     headerWrapper: {
+        marginTop: '10%',
         width: 400,
         alignItems: 'flex-end', // Aligns the headerWrapper to the right
         flexShrink: 1
     },
     header: {
         width: '100%',
+        // marginTop: '10%',
         paddingRight: 20,
     },
     contentWrapper: {
-        flexBasis: '50%',
+        // flexBasis: '50%',
         alignItems: 'center',
-        height: "40%",
+        height: "95%",
+    },
+    contentFade: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        height: 100,
+        zIndex: 100,
+    },
+    topFade: {
+        top: 0,
+        backgroundImage: 'linear-gradient(rgba(10, 25, 47, 1) 0%, rgba(10, 25, 47, 0) 100%)',
+    },
+    bottomFade: {
+        bottom: 0,
+        backgroundImage: 'linear-gradient(rgba(10, 25, 47, 0) 0%, rgba(10, 25, 47, 1) 100%)',
     },
     contentContainer: {
-        flexBasis: '20%',
+        // flexBasis: '20%',
         flexShrink: 1,
         flexGrow: 0,
         padding: 20,
         alignItems: 'center',
+        overflow: 'visible'
     },
     footer: {
         // backgroundColor: 'rgba(10, 25, 47, 128)',
@@ -132,8 +174,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     section: {
-        maxWidth: 800,
-        marginVertical: 20,
+        maxWidth: 600,
+        marginVertical: 50,
+    },
+    spacer: {
+        height: 100,
     },
     description: {
         fontSize: 16,

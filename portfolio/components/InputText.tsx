@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, TextInput, Text } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, StyleSheet, TextInput, Text} from 'react-native';
 
 interface InputTextProps {
     text: string;
@@ -8,6 +8,7 @@ interface InputTextProps {
     textStyle?: any;
     caretCharacter?: string;
     showCaret?: boolean;
+    delay?: number;
 }
 
 const InputText: React.FC<InputTextProps> = ({
@@ -17,8 +18,20 @@ const InputText: React.FC<InputTextProps> = ({
                                                  textStyle,
                                                  caretCharacter = '$',
                                                  showCaret = true,
+                                                 delay,
                                              }) => {
+    const [visible, setVisible] = useState(!delay);
     const [cursorVisible, setCursorVisible] = useState(true);
+
+    useEffect(() => {
+        if (delay) {
+            console.log('hereee')
+            console.log(delay)
+            console.log(visible)
+            const timeout = setTimeout(() => setVisible(true), delay);
+            return () => clearTimeout(timeout);
+        }
+    }, [setVisible]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -31,15 +44,15 @@ const InputText: React.FC<InputTextProps> = ({
 
     return (
         <View style={[styles.container, style]}>
-            {showCaret && <Text style={[styles.outputCaret, textStyle]}>{caretCharacter}</Text>}
-            <TextInput
-                style={[styles.hiddenInput, textStyle]}
-                value={text}
-                onChangeText={setText}
-                autoFocus
-            />
-            <Text style={textStyle}>{displayText}</Text>
-        </View>
+                {visible && showCaret && <Text style={[styles.outputCaret, textStyle]}>{caretCharacter}</Text>}
+                <TextInput
+                    style={[styles.hiddenInput, textStyle]}
+                    value={text}
+                    onChangeText={setText}
+                    autoFocus
+                />
+            <Text style={textStyle}>{visible ? displayText : ' '}</Text>
+            </View>
     );
 };
 
