@@ -125,10 +125,10 @@ export default function Header({ style, isSmallScreen }: HeaderProps) {
                 onSubmit={handleInputSubmit}
                 style={[styles.terminalInput, styles.inputText]}
                 textStyle={styles.terminalInputText}
-                delay={delay += DELAY_OFFSET}
+                delay={ hasVisitedBefore ? undefined : delay += DELAY_OFFSET}
                 noType={hasVisitedBefore}
             /> }
-            <ContactLinks style={style.conisSmallScreen} />
+            <ContactLinks style={styles.contactLinks} delay={ hasVisitedBefore ? undefined : delay += DELAY_OFFSET} />
         </View>
     );
 };

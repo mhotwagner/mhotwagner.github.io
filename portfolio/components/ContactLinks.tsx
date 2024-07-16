@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { View, StyleSheet, TouchableOpacity, Linking, Alert } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { FontAwesome } from '@expo/vector-icons';
@@ -6,10 +6,11 @@ import { FontAwesome } from '@expo/vector-icons';
 interface ContactLinksProps {
     style?: any;
     setInputValue?: (text: string) => void;
-
+    delay?: number;
 }
 
-export default function ContactLinks({ style, setInputValue }: ContactLinksProps) {
+export default function ContactLinks({ style, setInputValue, delay }: ContactLinksProps) {
+    const [visible, setVisible] = React.useState(!delay);
     const contactLinks = [
         { icon: 'envelope', action: () => copyToClipboard('mhotwagner@gmail.com', 'email copied to clipboard') },
         { icon: 'phone', action: () => copyToClipboard('1-231-680-0608', 'phone copied to clipboard') },
@@ -23,9 +24,16 @@ export default function ContactLinks({ style, setInputValue }: ContactLinksProps
         setInputValue && setInputValue(message);
     };
 
+    useEffect(() => {
+        if (delay) {
+            const timeout = setTimeout(() => setVisible(true), delay);
+            return () => clearTimeout(timeout);
+        }
+    }, [setVisible]);
+
     return (
         <View style={[styles.container, style]}>
-            <View style={styles.contactLinks}>
+            { visible && <View style={styles.contactLinks}>
                 {contactLinks.map((link, index) => (
                     <TouchableOpacity
                         key={index}
@@ -35,7 +43,7 @@ export default function ContactLinks({ style, setInputValue }: ContactLinksProps
                         <FontAwesome name={link.icon} size={20} color="#00a86b" />
                     </TouchableOpacity>
                 ))}
-            </View>
+            </View> }
         </View>
     );
 }
