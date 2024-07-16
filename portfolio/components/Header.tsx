@@ -22,13 +22,14 @@ export default function Header({ style, isSmallScreen }: HeaderProps) {
 
     useEffect(() => {
         const visitedBefore = localStorage.getItem('hasVisitedBefore');
+        print('VISITEDBEFORE ' + visitedBefore)
         if (!visitedBefore) {
             localStorage.setItem('hasVisitedBefore', 'true');
             setHasVisitedBefore(false);
         } else {
             setHasVisitedBefore(true);
         }
-        print('hasVisitedBefore: ' + hasVisitedBefore)
+        // print('hasVisitedBefore: ' + hasVisitedBefore)
     }, [hasVisitedBefore, setHasVisitedBefore]);
 
     const navItems = [
@@ -125,10 +126,10 @@ export default function Header({ style, isSmallScreen }: HeaderProps) {
                 onSubmit={handleInputSubmit}
                 style={[styles.terminalInput, styles.inputText]}
                 textStyle={styles.terminalInputText}
-                delay={ hasVisitedBefore ? undefined : delay += DELAY_OFFSET}
+                delay={ delay += DELAY_OFFSET}
                 noType={hasVisitedBefore}
             /> }
-            <ContactLinks style={styles.contactLinks} delay={ hasVisitedBefore ? undefined : delay += DELAY_OFFSET} />
+            <ContactLinks style={styles.contactLinks} delay={ delay += DELAY_OFFSET} hasVisitedBefore={hasVisitedBefore} />
         </View>
     );
 };

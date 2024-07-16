@@ -2,14 +2,18 @@ import React, {useEffect} from 'react';
 import { View, StyleSheet, TouchableOpacity, Linking, Alert } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { FontAwesome } from '@expo/vector-icons';
+import {has} from "react-native-reanimated/lib/typescript/createAnimatedComponent/utils";
 
 interface ContactLinksProps {
     style?: any;
     setInputValue?: (text: string) => void;
     delay?: number;
+    hasVisitedBefore?: boolean;
 }
 
-export default function ContactLinks({ style, setInputValue, delay }: ContactLinksProps) {
+const print = (s: string) => console.log(s);
+
+export default function ContactLinks({ style, setInputValue, delay, hasVisitedBefore }: ContactLinksProps) {
     const [visible, setVisible] = React.useState(!delay);
     const contactLinks = [
         { icon: 'envelope', action: () => copyToClipboard('mhotwagner@gmail.com', 'email copied to clipboard') },
@@ -25,11 +29,15 @@ export default function ContactLinks({ style, setInputValue, delay }: ContactLin
     };
 
     useEffect(() => {
-        if (delay) {
+        console.log('hasVisitedBefore: ' + hasVisitedBefore)
+        if (!hasVisitedBefore && delay) {
+            print('so we\'re not doing this?')
             const timeout = setTimeout(() => setVisible(true), delay);
             return () => clearTimeout(timeout);
+        } else {
+            setVisible(true);
         }
-    }, [setVisible]);
+    }, [setVisible, hasVisitedBefore]);
 
     return (
         <View style={[styles.container, style]}>
