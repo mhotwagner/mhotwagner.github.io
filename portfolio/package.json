@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "deploy": "touch dist/.nojekyll && gh-pages -t -d dist",
+    "deploy": "touch dist/.nojekyll && cp CNAME dist/ gh-pages -t -d dist",
     "predeploy": "expo export -p web"
   },
   "jest": {
@@ -23,6 +23,7 @@
     "@expo-google-fonts/vt323": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@expo/webpack-config": "^19.0.1",
+    "@react-native-clipboard/clipboard": "^1.14.1",
     "@react-navigation/native": "^6.0.2",
     "expo": "~51.0.18",
     "expo-font": "~12.0.7",

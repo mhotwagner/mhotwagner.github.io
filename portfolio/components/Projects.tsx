@@ -63,21 +63,23 @@ export default function Projects() {
                         source={project.thumbnail || 'http://via.placeholder.com/640x360'}
                         style={styles.thumbnail}
                     />
-                    <Text style={styles.projectName}>{project.name}</Text>
-                    <Text style={styles.company}>{project.company}</Text>
-                    <Text style={styles.description}>{project.description}</Text>
-                    <View style={styles.techStackContainer}>
-                        <View style={styles.techStack}>
-                            {project.technologies.map((tech, idx) => (
-                                <View key={idx} style={styles.techPill}>
-                                    <Text style={styles.techPillText}>{tech}</Text>
-                                </View>
-                            ))}
+                    <View style={styles.textContainer}>
+                        <Text style={styles.projectName}>{project.name}</Text>
+                        <Text style={styles.company}>{project.company}</Text>
+                        <Text style={styles.description}>{project.description}</Text>
+                        <View style={styles.techStackContainer}>
+                            <View style={styles.techStack}>
+                                {project.technologies.map((tech, idx) => (
+                                    <View key={idx} style={styles.techPill}>
+                                        <Text style={styles.techPillText}>{tech}</Text>
+                                    </View>
+                                ))}
+                            </View>
                         </View>
+                        <Text style={styles.details}>
+                            Developed a {project.description.toLowerCase()} using {project.technologies.join(', ')}.
+                        </Text>
                     </View>
-                    <Text style={styles.details}>
-                        Developed a {project.description.toLowerCase()} using {project.technologies.join(', ')}.
-                    </Text>
                 </View>
             ))}
         </View>
@@ -89,45 +91,47 @@ const styles = StyleSheet.create({
         padding: 20,
     },
     title: {
-        fontSize: 32,
+        fontSize: 28,
         color: '#ccd6f6',
         marginBottom: 20,
+        textAlign: 'center',
     },
     project: {
-        marginBottom: 40,
-        alignItems: 'center', // Center align project contents
+        flexDirection: 'row',
+        marginBottom: 50,
+        alignItems: 'flex-start',
     },
     thumbnail: {
-        width: '100%',
-        height: 200,
+        width: 200,
+        height: 150,
         resizeMode: 'cover',
         borderRadius: 10,
-        marginBottom: 15,
+        marginRight: 20,
+    },
+    textContainer: {
+        flex: 1,
     },
     projectName: {
-        fontSize: 28,
+        fontSize: 22,
         color: '#64ffda',
         marginBottom: 5,
     },
     company: {
-        fontSize: 20,
+        fontSize: 18,
         color: '#8892b0',
         marginBottom: 10,
     },
     description: {
-        fontSize: 18,
+        fontSize: 16,
         color: '#8892b0',
         marginBottom: 15,
-        textAlign: 'center', // Center align description text
     },
     techStackContainer: {
         marginBottom: 15,
-        width: '100%', // Ensure tech stack container takes full width
     },
     techStack: {
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center', // Center align tech stack pills
     },
     techPill: {
         backgroundColor: '#233554',
@@ -138,24 +142,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     techPillText: {
-        fontSize: 16,
+        fontSize: 14,
         color: '#64ffda',
     },
     details: {
-        fontSize: 18,
+        fontSize: 16,
         color: '#8892b0',
         lineHeight: 24,
-        marginBottom: 15,
-        // textAlign: 'center', // Center align details text
-    },
-    linkButton: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        backgroundColor: '#64ffda',
-        borderRadius: 5,
-    },
-    linkText: {
-        fontSize: 18,
-        color: '#0a192f',
     },
 });

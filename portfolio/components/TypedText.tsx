@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Text, View, StyleSheet} from 'react-native';
 
 interface TypedTextProps {
     text: string;
@@ -9,61 +9,62 @@ interface TypedTextProps {
     delay?: number;
     speed?: number;
     caretCharacter?: string;
-    useCursor?: boolean;
-    blinkCursor?: boolean;
+    showCaret?: boolean;
+    noType?: boolean;
 }
 
-const TypedText: React.FC<TypedTextProps> = (
-    {
-        text,
-        style,
-        textStyle,
-        caretStyle,
-        delay = 0,
-        speed = 100,
-        caretCharacter = '$',
-        useCursor = true,
-        // blinkCursor = false,
-    }) => {
-    const [displayedText, setDisplayedText] = useState(' ');
-    const [showCaret, setShowCaret] = useState(false);
+const print = (s: string) => console.log(s);
+
+const TypedText: React.FC<TypedTextProps> = ({
+                                                 text,
+                                                 style,
+                                                 textStyle,
+                                                 caretStyle,
+                                                 delay = 0,
+                                                 speed = 100,
+                                                 caretCharacter = '$',
+                                                 showCaret = true,
+                                                 noType = false,
+                                             }) => {
+    const [displayedText, setDisplayedText] = useState(noType ? text : ' ');
+    const [caretVisible, setCaretVisible] = useState(noType);
+
     if (caretStyle === undefined) {
         caretStyle = textStyle;
     }
-    // const [cursorVisible, setCursorVisible] = useState(false);
 
     useEffect(() => {
-        const timeout = setTimeout(() => {
-            setShowCaret(true);
-            let index = 0;
-            const interval = setInterval(() => {
-                if (useCursor && index < text.length) {
-                    setDisplayedText(text.slice(0, index) + '_');
-                } else {
+        if (noType) {
+            setCaretVisible(true);
+        } else {
+            print('doing this')
+            const timeout = setTimeout(() => {
+                setCaretVisible(true);
+                let index = 0;
+                const interval = setInterval(() => {
                     setDisplayedText(text.slice(0, index));
-                }
-                index++;
-                if (index === text.length + 1) {
-                    clearInterval(interval);
-                }
-            }, speed);
-           // console.log("here?")
-           //  if (blinkCursor) {
-           //      const cursorInterval = setInterval(() => {
-           //          setCursorVisible(!cursorVisible);
-           //          console.log(cursorVisible);
-           //          setDisplayedText(cursorVisible ? text +  '_' : text);
-           //      }, 750);
-           //      return () => clearInterval(cursorInterval);
-           //  }
-        }, delay);
+                    index++;
+                    if (index === text.length + 1) {
+                        clearInterval(interval);
+                    }
+                }, speed);
+            }, delay);
 
-        return () => clearTimeout(timeout);
-    }, [text, delay, speed, useCursor]);
+            return () => clearTimeout(timeout);
+        }
+    }, [text, delay, speed, noType]);
 
+    if (noType) {
+        return (
+            <View style={[styles.container, style]}>
+                {showCaret && caretVisible && <Text style={[styles.outputCaret, caretStyle]}>{caretCharacter}</Text>}
+                <Text style={textStyle}>{text}</Text>
+            </View>
+        )
+    }
     return (
         <View style={[styles.container, style]}>
-            { showCaret && <Text style={[styles.outputCaret, caretStyle]}>{caretCharacter}</Text> }
+            {showCaret && caretVisible && <Text style={[styles.outputCaret, caretStyle]}>{caretCharacter}</Text>}
             <Text style={textStyle}>{displayedText}</Text>
         </View>
     );

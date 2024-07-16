@@ -1,18 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export default function About() {
+interface AboutProps {
+    isSmallScreen: boolean;
+}
+
+export default function About({ isSmallScreen }: AboutProps) {
     return (
         <View>
-            <Text style={[styles.title, {marginTop: 0}]}>Who is Michael Hotwagner?</Text>
-            <Text style={styles.description}>
+            <Text style={[styles.title, isSmallScreen && styles.titleSmall, {marginTop: 0}]}>Who is Michael Hotwagner?</Text>
+            <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
                 I'm a fullstack software engineer with over a decade of experience designing,
                 developing, and implementing functional and elegant solutions to interesting problems.
                 With expertise spanning the stack, from infrastructure through the backend up to the
                 frontend, I have a proven ability to work with clients from design through development
                 and implementation to efficiently deliver excellent products.
             </Text>
-            <Text style={styles.description}>
+            <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
                 My story started in 1984, in Muskegon, Michigan, the perfect dichotomy of glorious,
                 beach-based summers and crisp, snowy winters. Raised by a family of teachers and
                 engineers, my love of learning was matched only by my need to tinker. I frequently
@@ -21,7 +25,7 @@ export default function About() {
                 together. By the time I wrote my first "game" of IF and GOTO statements in BASIC,
                 I was hooked.
             </Text>
-            <Text style={styles.description}>
+            <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
                 My love of learning has never been limited to technology. I've always wanted to know
                 everything I could about the world around me, and the
                 people that live in it. I began studying Spanish in middle school, traveled abroad to
@@ -31,7 +35,7 @@ export default function About() {
                 that my love of tinkering and building (or "engineering" as call it now) was my
                 real passion, and that if I worked hard, I could make a career out of it.
             </Text>
-            <Text style={styles.description}>
+            <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
                 Fifteen years later, I've built many projects large and small, personal and professional,
                 across industries with clients and partners around the globe. I love what I do, and I
                 work hard to keep my core values of curiosity, collaboration, and respect for all people
@@ -52,6 +56,12 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginBottom: 20,
     },
+    titleSmall: {
+        // fontSize: 20,
+        // marginTop: 10,
+        // marginBottom: 10,
+        textAlign: 'center',
+    },
     sectionTitle: {
         fontSize: 20,
         color: '#ccd6f6',
@@ -64,4 +74,7 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         marginBottom: 20,
     },
+    descriptionSmall: {
+        textAlign: 'center',
+    }
 });

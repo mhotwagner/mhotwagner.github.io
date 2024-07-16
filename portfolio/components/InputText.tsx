@@ -10,6 +10,7 @@ interface InputTextProps {
     caretCharacter?: string;
     showCaret?: boolean;
     delay?: number;
+    noType?: boolean;
 }
 
 const InputText: React.FC<InputTextProps> = ({
@@ -21,6 +22,7 @@ const InputText: React.FC<InputTextProps> = ({
                                                  caretCharacter = '$',
                                                  showCaret = true,
                                                  delay,
+                                                 noType,
                                              }) => {
     const [visible, setVisible] = useState(!delay);
     const [cursorVisible, setCursorVisible] = useState(true);
@@ -63,12 +65,12 @@ const InputText: React.FC<InputTextProps> = ({
                 onChangeText={setText}
                 onSubmitEditing={onSubmit}
                 onPressIn={() => setText('')}
-                autoFocus
+                // autoFocus
             />
             <Text
                 style={textStyle}
                 onPress={() => setText('')}
-            >{visible ? displayText : ' '}</Text>
+            >{noType ? visible ? displayText : ' ' : displayText}</Text>
         </View>
     );
 };

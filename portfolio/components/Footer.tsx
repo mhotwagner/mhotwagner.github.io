@@ -15,7 +15,6 @@ export default function Footer({style}: FooterProps) {
 
 const styles = StyleSheet.create({
     footer: {
-        padding: 20,
         alignItems: 'center',
     },
     footerText: {

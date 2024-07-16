@@ -1,45 +1,60 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Dimensions} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import About from "@/components/About";
 import Resume from "@/components/Resume";
 import Projects from "@/components/Projects";
 
-const moveMouseGlow = (e: any) => {}
+const moveMouseGlow = (e: any) => { }
 
 export default function Home() {
-    const [mouseGlowPosition, setMouseGlowPosition] = useState({x: 0, y: 0});
-    const [topFadeMouseGlowPosition, setTopFadeMouseGlowPosition] = useState({x: 0, y: 0});
+    const [mouseGlowPosition, setMouseGlowPosition] = useState({ x: 0, y: 0 });
+    const [topFadeMouseGlowPosition, setTopFadeMouseGlowPosition] = useState({ x: 0, y: 0 });
+    const [isSmallScreen, setIsSmallScreen] = useState(Dimensions.get('window').width < 1000);
+
+    useEffect(() => {
+        const updateLayout = () => {
+            setIsSmallScreen(Dimensions.get('window').width < 1000);
+        };
+
+        Dimensions.addEventListener('change', updateLayout);
+        return () => {
+            // @ts-ignore
+            Dimensions.removeEventListener('change', updateLayout);
+        };
+    }, []);
+
     const moveMouseGlow = (e: any) => {
         const x = e.clientX - 300;
         const y = e.clientY - 300;
-        setMouseGlowPosition({x, y});
+        setMouseGlowPosition({ x, y });
         const topFade = document.getElementById('topFade');
         if (topFade) {
             const topFadeRect = topFade.getBoundingClientRect();
             const topFadeX = e.clientX - topFadeRect.left - 300;
             const topFadeY = e.clientY - topFadeRect.top - 300;
-            setTopFadeMouseGlowPosition({x: topFadeX, y: topFadeY})
+            setTopFadeMouseGlowPosition({ x: topFadeX, y: topFadeY })
         }
     }
+
     return (
         <View style={styles.outerContainer} onPointerMove={moveMouseGlow}>
             <View style={styles.background}>
-                <View style={[styles.mouseGlow as any, {left: mouseGlowPosition.x, top: mouseGlowPosition.y}]}/>
+                { !isSmallScreen && <View style={[styles.mouseGlow as any, { left: mouseGlowPosition.x, top: mouseGlowPosition.y }]} /> }
             </View>
-            <View style={styles.pageContainer}>
-                <View style={styles.headerWrapper}>
-                    <Header style={styles.header}/>
+            <View style={[styles.pageContainer, isSmallScreen && styles.pageContainerSmall]}>
+                <View style={[styles.headerWrapper, isSmallScreen && styles.headerWrapperSmall]}>
+                    <Header style={styles.header} isSmallScreen={isSmallScreen} />
                 </View>
-                <View style={styles.contentWrapper}>
+                <View style={[styles.contentWrapper, isSmallScreen && styles.contentWrapperSmall]}>
                     <ScrollView
-                        contentContainerStyle={styles.contentContainer}
+                        contentContainerStyle={[styles.contentContainer, isSmallScreen && styles.contentContainerSmall]}
                         showsVerticalScrollIndicator={false}
                     >
-                        <View id="spacer" style={styles.spacer}/>
+                        { !isSmallScreen && <View id="spacer" style={styles.spacer} /> }
                         <View id="about" style={styles.section}>
-                            <About />
+                            <About isSmallScreen={isSmallScreen} />
                         </View>
                         <View id="resume" style={styles.section}>
                             <Resume />
@@ -47,20 +62,11 @@ export default function Home() {
                         <View id="projects" style={styles.section}>
                             <Projects />
                         </View>
-                        <View id="contact" style={styles.section}>
-                            <Text style={styles.title}>Contact</Text>
-                            <Text style={styles.description}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac nisl nec nisl
-                                tincidunt accumsan. Nulla facilisi. Proin ut nunc nec nunc laoreet ultricies. Donec
-                                scelerisque, nunc nec bibendum tincidunt, nunc lorem tincidunt ante, nec egestas
-                                libero purus non nulla. Integer euismod, risus nec tincidunt suscipit, mi purus
-                                ultricies nunc, vel ultricies elit purus nec nunc
-                            </Text>
-                        </View>
                     </ScrollView>
                 </View>
+                {isSmallScreen && <Footer style={[styles.footer, styles.footerSmall]} />}
             </View>
-            <Footer style={styles.footer}/>
+            {!isSmallScreen && <Footer style={[styles.footer, isSmallScreen && styles.footerSmall]} />}
         </View>
     );
 };
@@ -77,6 +83,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
+        overflow: 'hidden',
     },
     mouseGlow: {
         position: 'absolute',
@@ -93,14 +100,22 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         flex: 1,
     },
+    pageContainerSmall: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        height: '100%',
+    },
     headerWrapper: {
         marginTop: 100,
-        // width: 400,
         alignItems: 'flex-end',
         flexShrink: 1
     },
+    headerWrapperSmall: {
+        marginTop: 0,
+        alignItems: 'center',
+        width: '100%',
+    },
     header: {
-        // width: '100%',
         paddingRight: 20,
     },
     contentWrapper: {
@@ -108,20 +123,38 @@ const styles = StyleSheet.create({
         height: "95%",
         maxWidth: 600,
     },
+    contentWrapperSmall: {
+        maxWidth: 'auto',
+        // width: '80%',
+        // height: 800,
+        paddingHorizontal: 20,
+        // paddingTop: 60,
+        justifyContent: 'center',
+        flex: 1,
+        alignItems: 'center',
+    },
     contentContainer: {
         flexShrink: 1,
-        flexGrow: 0,
+        flexGrow: 1,
         padding: 20,
         alignItems: 'center',
-        overflow: 'visible'
+        height: '100%',
+    },
+    contentContainerSmall: {
+        alignItems: 'stretch',
+        alignSelf: 'center',
+        width:'80%',
     },
     footer: {
+        marginBottom: 20,
         width: '100%',
-        padding: 20,
         alignItems: 'center',
     },
+    footerSmall: {
+        marginTop: 20,
+        width: 'auto',
+    },
     section: {
-        // maxWidth: 600,
         marginVertical: 50,
     },
     spacer: {

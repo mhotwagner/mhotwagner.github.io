@@ -9,9 +9,11 @@ interface NavItemProps {
     delay?: number;
     speed?: number;
     onPress?: () => void;
+    noType?: boolean;
+    isSmallScreen?: boolean;
 }
 
-export default function NavItem({ children, name, style, delay = 0, speed=50, onPress }: NavItemProps) {
+export default function NavItem({ children, name, style, delay = 0, speed=50, onPress, noType, isSmallScreen }: NavItemProps) {
     const fullText = children?.toString() || '';
     const [hovering, setHovering] = React.useState(false);
 
@@ -26,9 +28,11 @@ export default function NavItem({ children, name, style, delay = 0, speed=50, on
                     textStyle={styles.terminalOutputText}
                     text={"/" + fullText}
                     delay={delay}
-                    caretCharacter={hovering ? '-->' : '->'}
+                    caretCharacter={ isSmallScreen ? hovering ? '-->' : ' ->' : hovering ? '-->' : '->'}
                     speed={speed}
-                    useCursor={false}/>
+                    useCursor={false}
+                    noType={noType}
+                />
             </Text>
         </Pressable>
     );
@@ -54,6 +58,7 @@ const styles = StyleSheet.create({
         left: 0,
         bottom: 0,
         width: 0,
+        //@ts-ignore
         transition: 'width 0.5s',
     },
     maskHover: {
