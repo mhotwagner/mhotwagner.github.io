@@ -22,6 +22,9 @@ export default function RootLayout() {
     const [loaded, error] = useFonts({
         SpaceMono: require('@/assets/fonts/SpaceMono-Regular.ttf'),
         VT323: require('@/assets/fonts/VT323-Regular.ttf'),
+        Rubik: require('@/assets/fonts/Rubik_400Regular.ttf'),
+        RubikBold: require('@/assets/fonts/Rubik_900Black.ttf'),
+        RobotoMonoBold: require('@/assets/fonts/RobotoMono_700Bold.ttf'),
         ...FontAwesome.font,
     });
 

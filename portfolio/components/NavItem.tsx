@@ -7,10 +7,11 @@ interface NavItemProps {
     name: string;
     style?: any;
     delay?: number;
+    speed?: number;
     onPress?: () => void;
 }
 
-export default function NavItem({ children, name, style, delay = 0, onPress }: NavItemProps) {
+export default function NavItem({ children, name, style, delay = 0, speed=50, onPress }: NavItemProps) {
     const fullText = children?.toString() || '';
     const [hovering, setHovering] = React.useState(false);
 
@@ -21,7 +22,13 @@ export default function NavItem({ children, name, style, delay = 0, onPress }: N
             onHoverOut={() => setHovering(false)}
         >
             <Text style={[styles.navItem, style]}>
-                <TypedText textStyle={styles.terminalOutputText} text={"/" + fullText} delay={delay} caretCharacter="->" speed={25} useCursor={false}/>
+                <TypedText
+                    textStyle={styles.terminalOutputText}
+                    text={"/" + fullText}
+                    delay={delay}
+                    caretCharacter={hovering ? '-->' : '->'}
+                    speed={speed}
+                    useCursor={false}/>
             </Text>
         </Pressable>
     );
@@ -37,4 +44,19 @@ const styles = StyleSheet.create({
         fontFamily: "Roboto Mono, monospace",
         fontSize: 14,
     },
+    hoverOverlay: {
+        color: "#f00 !important",
+        width: 200,
+    },
+    mask: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        width: 0,
+        transition: 'width 0.5s',
+    },
+    maskHover: {
+        width: '100%',
+    }
 });

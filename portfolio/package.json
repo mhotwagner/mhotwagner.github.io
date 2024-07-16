@@ -16,6 +16,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/roboto-mono": "^0.2.3",
+    "@expo-google-fonts/rubik": "^0.2.3",
+    "@expo-google-fonts/source-code-pro": "^0.2.3",
     "@expo-google-fonts/space-mono": "^0.2.3",
     "@expo-google-fonts/vt323": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",

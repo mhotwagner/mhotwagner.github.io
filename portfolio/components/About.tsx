@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 export default function About() {
     return (
         <View>
-            {/*<Text style={styles.title}>About Me</Text>*/}
+            <Text style={[styles.title, {marginTop: 0}]}>Who is Michael Hotwagner?</Text>
             <Text style={styles.description}>
                 I'm a fullstack software engineer with over a decade of experience designing,
                 developing, and implementing functional and elegant solutions to interesting problems.
@@ -49,12 +49,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 24,
         color: '#ccd6f6',
-        marginBottom: 10,
+        marginTop: 20,
+        marginBottom: 20,
     },
     sectionTitle: {
         fontSize: 20,
         color: '#ccd6f6',
-        marginTop: 20,
+        marginTop: 10,
         marginBottom: 10,
     },
     description: {

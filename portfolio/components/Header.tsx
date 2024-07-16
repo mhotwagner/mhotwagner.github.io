@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import { View, StyleSheet, Linking } from 'react-native';
+import {View, StyleSheet, Linking} from 'react-native';
 import TypedText from '@/components/TypedText';
 import NavItem from '@/components/NavItem';
 import InputText from "@/components/InputText";
@@ -8,23 +8,39 @@ interface HeaderProps {
     style?: any;
 }
 
-export default function Header({ style }: HeaderProps) {
+const INPUT_TYPE_SPEED = 25;
+const OUTPUT_TYPE_SPEED = 25;
+const DELAY_OFFSET = 750;
+
+export default function Header({style}: HeaderProps) {
     const [inputValue, setInputValue] = React.useState('');
     // const [inputVisible, setInputVisible] = React.useState(false);
     const navItems = [
-        { name: 'about', label: 'about' },
-        { name: 'resume', label: 'resume' },
-        { name: 'projects', label: 'projects' },
-        { name: 'contact', label: 'contact' }
+        {name: 'about', label: 'about'},
+        {name: 'resume', label: 'resume'},
+        {name: 'projects', label: 'projects'},
+        {name: 'contact', label: 'contact'}
     ];
 
     const handleNavItemPress = (id: string) => {
+        console.log(id)
         const element = document.getElementById(id);
+        console.log(element)
         if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'end'});
+            element.scrollIntoView({behavior: 'smooth'});
             setInputValue('cd /' + id);
         }
     };
+
+    const handleInputSubmit = () => {
+        if (inputValue.slice(0, 3) === 'cd ') {
+            const id = inputValue.slice(3);
+            console.log(id)
+            handleNavItemPress(id);
+        }
+    }
+
+    let delay = 0;
 
 
     return (
@@ -32,39 +48,52 @@ export default function Header({ style }: HeaderProps) {
             <TypedText text="whoami"
                        style={styles.terminalInput}
                        textStyle={styles.terminalInputText}
-                       delay={0} />
+                       delay={delay}
+                       speed={INPUT_TYPE_SPEED}/>
             <TypedText text="Michael Hotwagner"
                        style={[styles.terminalOutput, styles.questionCursor]}
                        textStyle={[styles.terminalOutputText, styles.name]}
                        caretStyle={styles.terminalOutputText}
-                       delay={1000}
+                       delay={delay+=DELAY_OFFSET}
                        speed={25}
                        caretCharacter="->"
-                       useCursor={false} />
+                       useCursor={false}/>
             <TypedText text="cat title"
                        style={styles.terminalInput}
                        textStyle={styles.terminalInputText}
-                       delay={2000} />
+                       delay={delay+=DELAY_OFFSET}
+                       speed={INPUT_TYPE_SPEED}/>
             <TypedText text="Fullstack Software Engineer"
                        style={[styles.terminalOutput, styles.questionCursor]}
                        textStyle={[styles.terminalOutputText, styles.title]}
-                      caretStyle={styles.terminalOutputText}
-                       delay={3000}
+                       caretStyle={styles.terminalOutputText}
+                       delay={delay+=DELAY_OFFSET}
                        speed={25}
                        caretCharacter="->"
-                       useCursor={false} />
-            <TypedText text="ls /" style={styles.terminalInput} textStyle={styles.terminalInputText} delay={4000} />
+                       useCursor={false}/>
+            <TypedText text="ls /"
+                       style={styles.terminalInput}
+                       textStyle={styles.terminalInputText}
+                       delay={delay+=DELAY_OFFSET}
+                       speed={INPUT_TYPE_SPEED}/>
             {navItems.map((item, index) => (
                 <NavItem
                     key={item.name}
                     name={item.name}
                     style={styles.terminalOutput}
-                    delay={5000 + index * 500} onPress={() => handleNavItemPress(item.name)}
+                    delay={delay+=DELAY_OFFSET} onPress={() => handleNavItemPress(item.name)}
+                    speed={25}
                 >
                     {item.label}
                 </NavItem>
             ))}
-            <InputText text={inputValue} setText={setInputValue} style={[styles.terminalInput, styles.inputText]} textStyle={styles.terminalInputText} delay={5000 + navItems.length * 500}/>
+            <InputText
+                text={inputValue}
+                setText={setInputValue}
+                onSubmit={handleInputSubmit}
+                style={[styles.terminalInput, styles.inputText]}
+                textStyle={styles.terminalInputText}
+                delay={delay+=DELAY_OFFSET}/>
         </View>
     );
 };
@@ -75,10 +104,11 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'flex-start',
+        minWidth: 400,
     },
     name: {
         fontSize: 24,
-        fontWeight: 900,
+        fontFamily: 'RobotoMonoBold, monospace'
     },
     title: {
         fontSize: 18,
@@ -105,6 +135,7 @@ const styles = StyleSheet.create({
         marginLeft: 15
     },
     questionCursor: {
+        // @ts-ignore
         cursor: "help",
     },
     terminalOutputText: {

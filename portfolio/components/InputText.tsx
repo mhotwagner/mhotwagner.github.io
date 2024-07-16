@@ -4,6 +4,7 @@ import {View, StyleSheet, TextInput, Text} from 'react-native';
 interface InputTextProps {
     text: string;
     setText: (text: string) => void;
+    onSubmit: () => void;
     style?: any;
     textStyle?: any;
     caretCharacter?: string;
@@ -14,6 +15,7 @@ interface InputTextProps {
 const InputText: React.FC<InputTextProps> = ({
                                                  text,
                                                  setText,
+                                                 onSubmit,
                                                  style,
                                                  textStyle,
                                                  caretCharacter = '$',
@@ -40,19 +42,34 @@ const InputText: React.FC<InputTextProps> = ({
         return () => clearInterval(interval);
     }, []);
 
+    const handlePress = () => {
+        setText('');
+        const element = document.getElementById('hiddenInput');
+        console.log(element)
+        if (element) {
+            element.focus();
+        }
+    }
+
     const displayText = cursorVisible ? text + '_' : text;
 
     return (
         <View style={[styles.container, style]}>
-                {visible && showCaret && <Text style={[styles.outputCaret, textStyle]}>{caretCharacter}</Text>}
-                <TextInput
-                    style={[styles.hiddenInput, textStyle]}
-                    value={text}
-                    onChangeText={setText}
-                    autoFocus
-                />
-            <Text style={textStyle}>{visible ? displayText : ' '}</Text>
-            </View>
+            {visible && showCaret && <Text style={[styles.outputCaret, textStyle]}>{caretCharacter}</Text>}
+            <TextInput
+                id="hiddenInput"
+                style={[styles.hiddenInput, textStyle]}
+                value={text}
+                onChangeText={setText}
+                onSubmitEditing={onSubmit}
+                onPressIn={() => setText('')}
+                autoFocus
+            />
+            <Text
+                style={textStyle}
+                onPress={() => setText('')}
+            >{visible ? displayText : ' '}</Text>
+        </View>
     );
 };
 
