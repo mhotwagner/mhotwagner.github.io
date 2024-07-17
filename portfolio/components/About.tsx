@@ -17,23 +17,21 @@ export default function About({ isSmallScreen }: AboutProps) {
                 and implementation to efficiently deliver excellent products.
             </Text>
             <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
-                My story started in 1984, in Muskegon, Michigan, the perfect dichotomy of glorious,
-                beach-based summers and crisp, snowy winters. Raised by a family of teachers and
-                engineers, my love of learning was matched only by my need to tinker. I frequently
-                disassembled the family phones, VCRs, and TVs. When our first computer finally arrived,
-                I took that apart too, but I quickly learned that it was more fun when it was put
-                together. By the time I wrote my first "game" of IF and GOTO statements in BASIC,
-                I was hooked.
+                My story started in 1984, in Muskegon, Michigan. Raised by a family of teachers and
+                engineers, my love of learning was matched only by my need to tinker (ie, disassemble
+                everything I could get my hands on). When our first computer finally arrived,
+                I took that apart too, but found it was more fun  put together. By the time
+                I wrote my first "game" of IF and GOTO statements in BASIC, I was hooked.
             </Text>
             <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
                 My love of learning has never been limited to technology. I've always wanted to know
                 everything I could about the world around me, and the
                 people that live in it. I began studying Spanish in middle school, traveled abroad to
                 cement the skill, and that same love for the wider world lead me to a degree in
-                Political Science, with a focus on International Relations. When I moved to New York
-                after college, I found my first home in the City teaching Spanish. I also discovered
-                that my love of tinkering and building (or "engineering" as call it now) was my
-                real passion, and that if I worked hard, I could make a career out of it.
+                Political Science and International Relations. When I moved to New York, I found my
+                first home in the City teaching Spanish. I also discovered that my love of tinkering
+                and building (or "engineering" as call it now) was my real passion, and that if I worked
+                hard, I could make a career out of it.
             </Text>
             <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
                 Fifteen years later, I've built many projects large and small, personal and professional,
