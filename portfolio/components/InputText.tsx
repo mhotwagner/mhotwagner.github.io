@@ -10,7 +10,9 @@ interface InputTextProps {
     caretCharacter?: string;
     showCaret?: boolean;
     delay?: number;
+    noDelay?: boolean;
     noType?: boolean;
+    speed?: number;
 }
 
 const InputText: React.FC<InputTextProps> = ({
@@ -22,21 +24,28 @@ const InputText: React.FC<InputTextProps> = ({
                                                  caretCharacter = '$',
                                                  showCaret = true,
                                                  delay,
-                                                 noType,
+                                                 noDelay,
+                                                 noType = false,
+                                                 speed = 25
                                              }) => {
     const [visible, setVisible] = useState(!delay);
     const [cursorVisible, setCursorVisible] = useState(true);
+    const [displayedText, setDisplayedText] = useState('');
+    const [displayText, setDisplayText] = useState('');
 
     useEffect(() => {
-        if (noType) {
+        console.log(delay)
+        if (noType || !delay) {
+            setCursorVisible(true);
             setVisible(true);
+            setDisplayedText(text);
         } else if (delay) {
             const timeout = setTimeout(() => setVisible(true), delay);
             return () => clearTimeout(timeout);
         } else {
             setVisible(true);
         }
-    }, [setVisible, noType]);
+    }, [setVisible, setCursorVisible, setDisplayedText, noType, delay]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -45,9 +54,26 @@ const InputText: React.FC<InputTextProps> = ({
         return () => clearInterval(interval);
     }, []);
 
-
-    const displayText = visible ? cursorVisible ? text + '_' : text : '';
-
+    useEffect(() => {
+        if (visible && !noType) {
+            let index = 0;
+            const interval = setInterval(() => {
+                if (index < text.length + 1) {
+                    setDisplayedText((text.slice(0, index)));
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, speed);
+            return () => clearInterval(interval);
+        } else {
+            setDisplayedText(text);
+        }
+    }, [text, visible, noType, speed]);
+    useEffect(() => {
+        setDisplayText(cursorVisible ? displayedText + '_' : displayedText);
+    }, [setDisplayText, cursorVisible, displayedText, caretCharacter]);
+    //
     return (
         <View style={[styles.container, style]}>
             {visible && showCaret && <Text style={[styles.outputCaret, textStyle]}>{caretCharacter}</Text>}
@@ -63,7 +89,9 @@ const InputText: React.FC<InputTextProps> = ({
             <Text
                 style={textStyle}
                 onPress={() => setText('')}
-            >{noType ? visible ? displayText : ' ' : displayText}</Text>
+            >
+                {noType ? (visible ? displayText : ' ') : visible ? displayText : ' '}
+            </Text>
         </View>
     );
 };

@@ -125,8 +125,8 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
                 onSubmit={handleInputSubmit}
                 style={[styles.terminalInput, styles.inputText, isSmallScreen && styles.inputTextSmall]}
                 textStyle={[styles.terminalInputText, isSmallScreen && styles.terminalInputSmall]}
-                delay={ delay += DELAY_OFFSET}
-                noType={hasVisitedBefore}
+                speed={25}
+                delay={ hasVisitedBefore ? 0 : delay += DELAY_OFFSET}
             />
             <ContactLinks
                 style={[styles.contactLinks, isSmallScreen && styles.contactLinksSmall ]}
