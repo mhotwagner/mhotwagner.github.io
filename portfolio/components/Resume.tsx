@@ -48,51 +48,51 @@ export default function Resume({ setInputValue }: ResumeProps) {
             <Text style={styles.jobDate}>June 2020 - July 2024</Text>
             <Text style={styles.jobDescription}>
                 - Developed backend business logic in Django and PostgreSQL.
-                {"\n"}- Supported frontend apps in React, Vue, and vanilla JS through APIs in GraphQL and REST.
-                {"\n"}- Maintained and built real-time code evaluation API app in Flask and Docker.
-                {"\n"}- Supported and developed new languages for real-time code evaluation.
-                {"\n"}- Designed and deployed a replacement for Docker-based evaluation runners using AWS Lambda.
-                {"\n"}- Maintained CI deployment pipeline with GitHub, Travis CI, and ElasticBeanstalk.
-                {"\n"}- Managed AWS infrastructure on ElasticBeanstalk, RDS, and Lambda.
+                {"\n"}- Supported frontend apps in React, Vue, and vanilla JS through APIs in GraphQL and REST
+                {"\n"}- Maintained and built real-time code evaluation API app in Flask and Docker
+                {"\n"}- Supported and developed new languages for real-time code evaluation
+                {"\n"}- Designed and deployed a replacement for Docker-based evaluation runners using AWS Lambda
+                {"\n"}- Maintained CI deployment pipeline with GitHub, Travis CI, and ElasticBeanstalk
+                {"\n"}- Managed AWS infrastructure on ElasticBeanstalk, RDS, and Lambda
             </Text>
 
             <Text style={styles.jobTitle}>Lead Internationalization Engineer at WeWork</Text>
             <Text style={styles.jobDate}>March 2018 - February 2020</Text>
             <Text style={styles.jobDescription}>
-                - Developed and managed internationalization infrastructure for diverse applications.
-                {"\n"}- Built and managed tools for automated integration with internationalization and localization workflows.
-                {"\n"}- Worked with third-party vendors to integrate and support localization tools.
+                - Developed and managed internationalization infrastructure for diverse applications
+                {"\n"}- Built and managed tools for automated integration with internationalization and localization workflows
+                {"\n"}- Worked with third-party vendors to integrate and support localization tools
             </Text>
 
             <Text style={styles.jobTitle}>Full Stack Software Engineer at Voxy</Text>
             <Text style={styles.jobDate}>September 2015 - February 2018</Text>
             <Text style={styles.jobDescription}>
-                - Contributed to a multi-tenant English language learning app in the AWS ecosystem.
-                {"\n"}- Architected, developed, deployed, and maintained app components including infrastructure, backend, and user clients.
-                {"\n"}- Collaborated with product team using agile and TDD methodologies.
+                - Contributed to a multi-tenant English language learning app in the AWS ecosystem
+                {"\n"}- Architected, developed, deployed, and maintained app components including infrastructure, backend, and user clients
+                {"\n"}- Collaborated with product team using agile and TDD methodologies
             </Text>
 
             <Text style={styles.jobTitle}>Full Stack Developer at Fluent City</Text>
             <Text style={styles.jobDate}>October 2013 - September 2015</Text>
             <Text style={styles.jobDescription}>
-                - Developed and maintained customer-facing website and internal systems.
-                {"\n"}- Integrated internal database with Salesforce.
-                {"\n"}- Contributed to all aspects of business development.
+                - Developed and maintained customer-facing website and internal systems
+                {"\n"}- Integrated internal database with Salesforce
+                {"\n"}- Contributed to all aspects of business development
             </Text>
 
             <Text style={styles.jobTitle}>Spanish Teacher at Fluent City</Text>
             <Text style={styles.jobDate}>March 2011 - January 2015</Text>
             <Text style={styles.jobDescription}>
-                - Instructed adults in Spanish.
-                {"\n"}- Planned curriculum and generated class materials.
+                - Instructed adults in Spanish
+                {"\n"}- Planned curriculum and generated class materials
             </Text>
 
             <Text style={styles.jobTitle}>Technology Lead at Protocol</Text>
             <Text style={styles.jobDate}>August 2011 - October 2013</Text>
             <Text style={styles.jobDescription}>
-                - Developed company websites and managed web-based and mobile application projects.
-                {"\n"}- Built and maintained Magento-based e-commerce programs.
-                {"\n"}- Managed office technology and software.
+                - Developed company websites and managed web-based and mobile application projects
+                {"\n"}- Built and maintained Magento-based e-commerce programs
+                {"\n"}- Managed office technology and software
             </Text>
 
             <Text style={styles.jobTitle}>Other Roles</Text>
