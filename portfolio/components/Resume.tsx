@@ -43,7 +43,7 @@ export default function Resume({setInputValue}: ResumeProps) {
 
             <Text style={styles.sectionTitle}>Work Experience</Text>
 
-            <Text style={styles.jobTitle}>Senior Software Engineer at Vettery</Text>
+            <Text style={styles.jobTitle}>Senior Software Engineer at Vettery/Hired</Text>
             <Text style={styles.jobDate}>June 2020 - July 2024</Text>
             <Text style={styles.jobDescription}>
                 - Developed backend business logic in Django and PostgreSQL.
@@ -75,6 +75,7 @@ export default function Resume({setInputValue}: ResumeProps) {
             <Text style={styles.jobDate}>October 2013 - September 2015</Text>
             <Text style={styles.jobDescription}>
                 - Developed and maintained customer-facing website and internal systems.
+                {"\n"}- Built out new company and booking site in Python/Django.
                 {"\n"}- Integrated internal database with Salesforce.
                 {"\n"}- Contributed to all aspects of business development.
             </Text>
@@ -89,8 +90,8 @@ export default function Resume({setInputValue}: ResumeProps) {
             <Text style={styles.jobTitle}>Technology Lead at Protocol</Text>
             <Text style={styles.jobDate}>August 2011 - October 2013</Text>
             <Text style={styles.jobDescription}>
-                - Developed company websites and managed web-based and mobile application projects.
-                {"\n"}- Built and maintained Magento-based e-commerce programs.
+                - Developed and maintained company websites and managed web-based and mobile application projects.
+                {"\n"}- Built and implemented Magento-based e-commerce programs.
                 {"\n"}- Managed office technology and software.
             </Text>
 
