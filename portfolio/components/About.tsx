@@ -17,7 +17,7 @@ export default function About({ isSmallScreen }: AboutProps) {
                 and implementation to efficiently deliver excellent products.
             </Text>
             <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>
-                My story started in 1984, in Muskegon, Michigan. Raised by a family of teachers and
+                My story started in Muskegon, Michigan. Raised by a family of teachers and
                 engineers, my love of learning was matched only by my need to tinker (ie, disassemble
                 everything I could get my hands on). When our first computer finally arrived,
                 I took that apart too, but found it was more fun  put together. By the time
@@ -27,10 +27,10 @@ export default function About({ isSmallScreen }: AboutProps) {
                 My love of learning has never been limited to technology. I've always wanted to know
                 everything I could about the world around me, and the
                 people that live in it. I began studying Spanish in middle school, traveled abroad to
-                cement the skill, and that same love for the wider world lead me to a degree in
+                cement the skill, and that same love for the wider world led me to a degree in
                 Political Science and International Relations. When I moved to New York, I found my
                 first home in the City teaching Spanish. I also discovered that my love of tinkering
-                and building (or "engineering" as call it now) was my real passion, and that if I worked
+                and building (or "engineering" as I call it now) was my real passion, and that if I worked
                 hard, I could make a career out of it.
             </Text>
             <Text style={[styles.description, isSmallScreen && styles.descriptionSmall]}>

@@ -8,6 +8,7 @@ import ContactLinks from '@/components/ContactLinks';
 interface HeaderProps {
     style?: any;
     isSmallScreen: boolean;
+    isVerySmallScreen: boolean;
     inputValue: string;
     setInputValue: (value: string) => void;
 }
@@ -17,7 +18,7 @@ const OUTPUT_TYPE_SPEED = 25;
 const DELAY_OFFSET = 750;
 
 
-export default function Header({ style, isSmallScreen, inputValue, setInputValue }: HeaderProps) {
+export default function Header({ style, isSmallScreen, isVerySmallScreen, inputValue, setInputValue }: HeaderProps) {
     const [hasVisitedBefore, setHasVisitedBefore] = useState(false);
 
     useEffect(() => {
@@ -84,7 +85,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
                 speed={INPUT_TYPE_SPEED}
                 noType={hasVisitedBefore}
             />}
-            <TypedText
+            { !isVerySmallScreen && <TypedText
                 text="Fullstack Software Engineer"
                 style={[styles.terminalOutput, styles.standardCursor]}
                 textStyle={[styles.terminalOutputText, styles.title]}
@@ -94,7 +95,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
                 speed={25}
                 caretCharacter="->"
                 noType={hasVisitedBefore}
-            />
+            /> }
             { !isSmallScreen && <TypedText
                 text="ls /"
                 style={[styles.terminalInput, styles.standardCursor]}
@@ -165,6 +166,7 @@ const styles = StyleSheet.create({
     inputTextSmall: {
         marginTop: 10,
         width: '50%',
+        maxWidth: 300,
     },
     terminalInput: {
         fontFamily: 'vt323, courier new, monospace',
@@ -202,11 +204,13 @@ const styles = StyleSheet.create({
     navItemsSmall: {
         flexDirection: 'row',
         justifyContent: 'center',
+        marginTop: 10,
     },
     contactLinks: {
         marginTop: 20,
     },
     contactLinksSmall: {
-        marginTop: 10,
+        marginTop: 0,
+        marginBottom: 10,
     }
 });

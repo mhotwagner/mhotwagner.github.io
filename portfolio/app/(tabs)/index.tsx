@@ -12,6 +12,7 @@ export default function Home() {
     const [mouseGlowPosition, setMouseGlowPosition] = useState({ x: 0, y: 0 });
     const [topFadeMouseGlowPosition, setTopFadeMouseGlowPosition] = useState({ x: 0, y: 0 });
     const [isSmallScreen, setIsSmallScreen] = useState(Dimensions.get('window').width < 1000);
+    const [isVerySmallScreen, setIsVerySmallScreen] = useState(Dimensions.get('window').width < 768);
     const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
@@ -49,6 +50,7 @@ export default function Home() {
                     <Header
                         style={styles.header}
                         isSmallScreen={isSmallScreen}
+                        isVerySmallScreen={isVerySmallScreen}
                         inputValue={inputValue}
                         setInputValue={setInputValue}
                     />
@@ -62,9 +64,11 @@ export default function Home() {
                         <View id="about" style={[styles.section, isSmallScreen && styles.sectionSmall]}>
                             <About isSmallScreen={isSmallScreen} />
                         </View>
+                        <View style={styles.hr} />
                         <View id="resume" style={[styles.section, isSmallScreen && styles.sectionSmall]}>
                             <Resume setInputValue={setInputValue} />
                         </View>
+                        <View style={styles.hr} />
                         <View id="projects" style={[styles.section, isSmallScreen && styles.sectionSmall]}>
                             <Projects />
                         </View>
@@ -149,7 +153,7 @@ const styles = StyleSheet.create({
     contentContainerSmall: {
         alignItems: 'stretch',
         alignSelf: 'center',
-        width:'80%',
+        width:'90%',
     },
     footer: {
         marginBottom: 20,
@@ -168,6 +172,11 @@ const styles = StyleSheet.create({
     },
     spacer: {
         height: 100,
+    },
+    hr: {
+        width: '100%',
+        height: 1,
+        backgroundColor: '#00a86b',
     },
     description: {
         fontSize: 16,

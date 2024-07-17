@@ -82,7 +82,7 @@ export default function Projects() {
     const isSmallScreen = Dimensions.get('window').width < 768;
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, isSmallScreen && styles.containerSmall]}>
             <Text style={styles.title}>Projects</Text>
             {projects.map((project, index) => (
                 <View key={index} style={styles.project}>
@@ -120,6 +120,9 @@ const styles = StyleSheet.create({
     container: {
         padding: 20,
         opacity: 0.75,
+    },
+    containerSmall: {
+        // width: '80%',
     },
     title: {
         fontSize: 28,
