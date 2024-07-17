@@ -8,7 +8,7 @@ interface ResumeProps {
 
 export default function Resume({setInputValue}: ResumeProps) {
     const handleDownload = async () => {
-        const uri = require('@/assets/MichaelHotwagner2024.pdf');
+        const uri = require('@/assets/files/MichaelHotwagner2024.pdf');
 
         if (Platform.OS === 'web') {
             const link = document.createElement('a');
