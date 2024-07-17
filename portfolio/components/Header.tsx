@@ -59,7 +59,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
         <View style={[styles.header, style, isSmallScreen && styles.headerSmall]}>
             { !isSmallScreen && <TypedText
                 text="whoami"
-                style={styles.terminalInput}
+                style={[styles.terminalInput, styles.standardCursor]}
                 textStyle={styles.terminalInputText}
                 delay={delay}
                 speed={INPUT_TYPE_SPEED}
@@ -67,7 +67,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
             />}
             <TypedText
                 text="Michael Hotwagner"
-                style={[styles.terminalOutput, styles.questionCursor]}
+                style={[styles.terminalOutput, styles.standardCursor]}
                 textStyle={[styles.terminalOutputText, styles.name]}
                 showCaret={!isSmallScreen}
                 caretStyle={styles.terminalOutputText}
@@ -78,7 +78,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
             />
             { !isSmallScreen && <TypedText
                 text="cat title"
-                style={styles.terminalInput}
+                style={[styles.terminalInput, styles.standardCursor]}
                 textStyle={styles.terminalInputText}
                 delay={delay += DELAY_OFFSET}
                 speed={INPUT_TYPE_SPEED}
@@ -86,7 +86,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
             />}
             <TypedText
                 text="Fullstack Software Engineer"
-                style={[styles.terminalOutput, styles.questionCursor]}
+                style={[styles.terminalOutput, styles.standardCursor]}
                 textStyle={[styles.terminalOutputText, styles.title]}
                 showCaret={!isSmallScreen}
                 caretStyle={styles.terminalOutputText}
@@ -97,7 +97,7 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
             />
             { !isSmallScreen && <TypedText
                 text="ls /"
-                style={styles.terminalInput}
+                style={[styles.terminalInput, styles.standardCursor]}
                 textStyle={styles.terminalInputText}
                 delay={delay += DELAY_OFFSET}
                 speed={INPUT_TYPE_SPEED}
@@ -119,17 +119,17 @@ export default function Header({ style, isSmallScreen, inputValue, setInputValue
                     </NavItem>
                 ))}
             </View>
-            { !isSmallScreen && <InputText
+            <InputText
                 text={inputValue}
                 setText={setInputValue}
                 onSubmit={handleInputSubmit}
-                style={[styles.terminalInput, styles.inputText]}
-                textStyle={styles.terminalInputText}
+                style={[styles.terminalInput, styles.inputText, isSmallScreen && styles.inputTextSmall]}
+                textStyle={[styles.terminalInputText, isSmallScreen && styles.terminalInputSmall]}
                 delay={ delay += DELAY_OFFSET}
                 noType={hasVisitedBefore}
-            /> }
+            />
             <ContactLinks
-                style={styles.contactLinks}
+                style={[styles.contactLinks, isSmallScreen && styles.contactLinksSmall ]}
                 delay={ delay += DELAY_OFFSET}
                 hasVisitedBefore={hasVisitedBefore}
                 setInputValue={setInputValue}
@@ -161,6 +161,10 @@ const styles = StyleSheet.create({
     inputText: {
         marginTop: 20,
     },
+    inputTextSmall: {
+        marginTop: 10,
+        width: '50%',
+    },
     terminalInput: {
         fontFamily: 'vt323, courier new, monospace',
         color: '#39ff14',
@@ -171,6 +175,10 @@ const styles = StyleSheet.create({
         color: '#39ff14',
         fontFamily: 'courier new, monospace',
     },
+    terminalInputSmall: {
+        color: "rgb(102, 255, 102)",
+        fontWeight: 700,
+    },
     terminalOutput: {
         color: "#00a86b",
         flexDirection: 'row',
@@ -178,9 +186,9 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginLeft: 15
     },
-    questionCursor: {
+    standardCursor: {
         // @ts-ignore
-        cursor: "help",
+        cursor: "default",
     },
     terminalOutputText: {
         color: "#00a86b",
@@ -196,5 +204,8 @@ const styles = StyleSheet.create({
     },
     contactLinks: {
         marginTop: 20,
+    },
+    contactLinksSmall: {
+        marginTop: 10,
     }
 });
