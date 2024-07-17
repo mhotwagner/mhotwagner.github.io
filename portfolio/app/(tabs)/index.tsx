@@ -59,13 +59,13 @@ export default function Home() {
                         showsVerticalScrollIndicator={false}
                     >
                         { !isSmallScreen && <View id="spacer" style={styles.spacer} /> }
-                        <View id="about" style={styles.section}>
+                        <View id="about" style={[styles.section, isSmallScreen && styles.sectionSmall]}>
                             <About isSmallScreen={isSmallScreen} />
                         </View>
-                        <View id="resume" style={styles.section}>
+                        <View id="resume" style={[styles.section, isSmallScreen && styles.sectionSmall]}>
                             <Resume setInputValue={setInputValue} />
                         </View>
-                        <View id="projects" style={styles.section}>
+                        <View id="projects" style={[styles.section, isSmallScreen && styles.sectionSmall]}>
                             <Projects />
                         </View>
                     </ScrollView>
@@ -162,6 +162,9 @@ const styles = StyleSheet.create({
     },
     section: {
         marginVertical: 50,
+    },
+    sectionSmall: {
+        marginVertical: 20,
     },
     spacer: {
         height: 100,

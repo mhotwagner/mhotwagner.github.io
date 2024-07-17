@@ -3,7 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, Linking, Platform } from 'rea
 import * as FileSystem from 'expo-file-system';
 import { Asset } from 'expo-asset';
 
-export default function Resume() {
+interface ResumeProps {
+    setInputValue: (value: string) => void;
+}
+
+export default function Resume({ setInputValue }: ResumeProps) {
     const handleDownload = async () => {
         if (Platform.OS === 'web') {
             const pdfAsset = Asset.fromModule(require('@/assets/files/MichaelHotwagner2024.pdf'));
@@ -12,6 +16,7 @@ export default function Resume() {
             link.href = pdfAsset.uri;
             link.download = 'MichaelHotwagner2024.pdf';
             link.click();
+            setInputValue('resume downloaded')
         } else {
             const url = FileSystem.documentDirectory + 'MichaelHotwagner2024.pdf';
             FileSystem.downloadAsync(
@@ -21,6 +26,7 @@ export default function Resume() {
                 FileSystem.getContentUriAsync(uri).then(cUri => {
                     Linking.openURL(cUri);
                 });
+                setInputValue('resume downloaded')
             }).catch(error => {
                 console.error(error);
             });

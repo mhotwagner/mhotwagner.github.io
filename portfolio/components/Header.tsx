@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
     headerSmall: {
         alignItems: 'center',
         minWidth: '100%',
+        paddingBottom: 10,
     },
     name: {
         fontSize: 24,
