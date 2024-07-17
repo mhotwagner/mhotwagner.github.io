@@ -12,6 +12,7 @@ export default function Home() {
     const [mouseGlowPosition, setMouseGlowPosition] = useState({ x: 0, y: 0 });
     const [topFadeMouseGlowPosition, setTopFadeMouseGlowPosition] = useState({ x: 0, y: 0 });
     const [isSmallScreen, setIsSmallScreen] = useState(Dimensions.get('window').width < 1000);
+    const [inputValue, setInputValue] = useState('');
 
     useEffect(() => {
         const updateLayout = () => {
@@ -45,7 +46,12 @@ export default function Home() {
             </View>
             <View style={[styles.pageContainer, isSmallScreen && styles.pageContainerSmall]}>
                 <View style={[styles.headerWrapper, isSmallScreen && styles.headerWrapperSmall]}>
-                    <Header style={styles.header} isSmallScreen={isSmallScreen} />
+                    <Header
+                        style={styles.header}
+                        isSmallScreen={isSmallScreen}
+                        inputValue={inputValue}
+                        setInputValue={setInputValue}
+                    />
                 </View>
                 <View style={[styles.contentWrapper, isSmallScreen && styles.contentWrapperSmall]}>
                     <ScrollView
@@ -57,7 +63,7 @@ export default function Home() {
                             <About isSmallScreen={isSmallScreen} />
                         </View>
                         <View id="resume" style={styles.section}>
-                            <Resume />
+                            <Resume setInputValue={setInputValue} />
                         </View>
                         <View id="projects" style={styles.section}>
                             <Projects />

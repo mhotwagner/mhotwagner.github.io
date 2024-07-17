@@ -28,11 +28,15 @@ const InputText: React.FC<InputTextProps> = ({
     const [cursorVisible, setCursorVisible] = useState(true);
 
     useEffect(() => {
-        if (delay) {
+        if (noType) {
+            setVisible(true);
+        } else if (delay) {
             const timeout = setTimeout(() => setVisible(true), delay);
             return () => clearTimeout(timeout);
+        } else {
+            setVisible(true);
         }
-    }, [setVisible]);
+    }, [setVisible, noType]);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -41,14 +45,6 @@ const InputText: React.FC<InputTextProps> = ({
         return () => clearInterval(interval);
     }, []);
 
-    const handlePress = () => {
-        setText('');
-        const element = document.getElementById('hiddenInput');
-        console.log(element)
-        if (element) {
-            element.focus();
-        }
-    }
 
     const displayText = visible ? cursorVisible ? text + '_' : text : '';
 
@@ -59,8 +55,8 @@ const InputText: React.FC<InputTextProps> = ({
                 id="hiddenInput"
                 style={[styles.hiddenInput, textStyle]}
                 value={text}
-                onChangeText={setText}
-                onSubmitEditing={onSubmit}
+                // onChangeText={setText}
+                // onSubmitEditing={onSubmit}
                 onPressIn={() => setText('')}
                 // autoFocus
             />

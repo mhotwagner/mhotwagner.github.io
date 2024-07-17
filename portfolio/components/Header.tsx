@@ -7,22 +7,21 @@ import ContactLinks from '@/components/ContactLinks';
 
 interface HeaderProps {
     style?: any;
-    isSmallScreen?: boolean;
+    isSmallScreen: boolean;
+    inputValue: string;
+    setInputValue: (value: string) => void;
 }
 
 const INPUT_TYPE_SPEED = 25;
 const OUTPUT_TYPE_SPEED = 25;
 const DELAY_OFFSET = 750;
 
-const print = (s: string) => console.log(s);
 
-export default function Header({ style, isSmallScreen }: HeaderProps) {
-    const [inputValue, setInputValue] = React.useState('');
+export default function Header({ style, isSmallScreen, inputValue, setInputValue }: HeaderProps) {
     const [hasVisitedBefore, setHasVisitedBefore] = useState(false);
 
     useEffect(() => {
         const visitedBefore = localStorage.getItem('hasVisitedBefore');
-        print('VISITEDBEFORE ' + visitedBefore)
         if (!visitedBefore) {
             localStorage.setItem('hasVisitedBefore', 'true');
             setHasVisitedBefore(false);
@@ -129,7 +128,12 @@ export default function Header({ style, isSmallScreen }: HeaderProps) {
                 delay={ delay += DELAY_OFFSET}
                 noType={hasVisitedBefore}
             /> }
-            <ContactLinks style={styles.contactLinks} delay={ delay += DELAY_OFFSET} hasVisitedBefore={hasVisitedBefore} />
+            <ContactLinks
+                style={styles.contactLinks}
+                delay={ delay += DELAY_OFFSET}
+                hasVisitedBefore={hasVisitedBefore}
+                setInputValue={setInputValue}
+            />
         </View>
     );
 };

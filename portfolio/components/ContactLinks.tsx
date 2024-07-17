@@ -11,8 +11,6 @@ interface ContactLinksProps {
     hasVisitedBefore?: boolean;
 }
 
-const print = (s: string) => console.log(s);
-
 export default function ContactLinks({ style, setInputValue, delay, hasVisitedBefore }: ContactLinksProps) {
     const [visible, setVisible] = React.useState(!delay);
     const contactLinks = [
@@ -24,14 +22,11 @@ export default function ContactLinks({ style, setInputValue, delay, hasVisitedBe
 
     const copyToClipboard = (text: string, message: string) => {
         Clipboard.setString(text);
-        // Alert.alert('Copied to Clipboard', text);
         setInputValue && setInputValue(message);
     };
 
     useEffect(() => {
-        console.log('hasVisitedBefore: ' + hasVisitedBefore)
         if (!hasVisitedBefore && delay) {
-            print('so we\'re not doing this?')
             const timeout = setTimeout(() => setVisible(true), delay);
             return () => clearTimeout(timeout);
         } else {

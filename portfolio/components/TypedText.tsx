@@ -13,8 +13,6 @@ interface TypedTextProps {
     noType?: boolean;
 }
 
-const print = (s: string) => console.log(s);
-
 const TypedText: React.FC<TypedTextProps> = ({
                                                  text,
                                                  style,
@@ -37,7 +35,6 @@ const TypedText: React.FC<TypedTextProps> = ({
         if (noType) {
             setCaretVisible(true);
         } else {
-            print('doing this')
             const timeout = setTimeout(() => {
                 setCaretVisible(true);
                 let index = 0;

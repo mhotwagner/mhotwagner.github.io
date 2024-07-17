@@ -1,9 +1,35 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, Alert } from 'react-native';
+import * as FileSystem from 'expo-file-system';
 
-export default function Resume() {
-    const handleDownload = () => {
-        Linking.openURL(require('@/assets/MichaelHotwagner2024.pdf'));
+interface ResumeProps {
+    setInputValue: any;
+}
+
+export default function Resume({setInputValue}: ResumeProps) {
+    const handleDownload = async () => {
+        const uri = require('@/assets/MichaelHotwagner2024.pdf');
+
+        if (Platform.OS === 'web') {
+            const link = document.createElement('a');
+            link.href = uri;
+            link.download = 'MichaelHotwagner2024.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            setInputValue('download complete');
+        } else {
+            try {
+                const fileUri = FileSystem.documentDirectory + 'MichaelHotwagner2024.pdf';
+                await FileSystem.downloadAsync(uri, fileUri);
+                Alert.alert('Download complete!', 'File saved to ' + fileUri);
+                setInputValue('download complete');
+            } catch (error) {
+                Alert.alert('Error', 'An error occurred while downloading the file.');
+                setInputValue('download error');
+                console.error(error);
+            }
+        }
     };
 
     return (

@@ -30,7 +30,6 @@ export default function NavItem({ children, name, style, delay = 0, speed=50, on
                     delay={delay}
                     caretCharacter={ isSmallScreen ? hovering ? '-->' : ' ->' : hovering ? '-->' : '->'}
                     speed={speed}
-                    useCursor={false}
                     noType={noType}
                 />
             </Text>
@@ -49,7 +48,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     hoverOverlay: {
-        color: "#f00 !important",
+        color: "#f00",
         width: 200,
     },
     mask: {
