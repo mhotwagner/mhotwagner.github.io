@@ -11,10 +11,13 @@ const moveMouseGlow = (e: any) => { }
 export default function Home() {
     const [mouseGlowPosition, setMouseGlowPosition] = useState({ x: 0, y: 0 });
     const [topFadeMouseGlowPosition, setTopFadeMouseGlowPosition] = useState({ x: 0, y: 0 });
-    const [isSmallScreen, setIsSmallScreen] = useState(Dimensions.get('window').width < 1000);
+    const [orientation, setOrientation] = useState(
+        Dimensions.get('window').width < Dimensions.get('window').height ? 'PORTRAIT' : 'LANDSCAPE'
+        );
+
+    const [isSmallScreen, setIsSmallScreen] = useState(Dimensions.get('window').width < 1000 && orientation === 'PORTRAIT');
     const [isVerySmallScreen, setIsVerySmallScreen] = useState(Dimensions.get('window').width < 768);
     const [inputValue, setInputValue] = useState('');
-
     useEffect(() => {
         const updateLayout = () => {
             setIsSmallScreen(Dimensions.get('window').width < 1000);
