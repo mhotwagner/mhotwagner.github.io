@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     },
     headerSmall: {
         alignItems: 'center',
-        minWidth: '100%',
         paddingBottom: 10,
     },
     name: {
@@ -164,8 +163,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     inputTextSmall: {
-        marginTop: 10,
-        width: '50%',
+        width: '100%',
         maxWidth: 300,
     },
     terminalInput: {
