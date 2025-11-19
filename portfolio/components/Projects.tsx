@@ -3,6 +3,15 @@ import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 
 const projects = [
     {
+        id: 'folio',
+        name: "folioworks.com",
+        company: "for Folio",
+        description: "Early career guidance and hiring",
+        technologies: ["Django", "AWS", "Terraform", "Docker", "OpenSearch", "OpenAI", "Next.js", "Python", "Javascript"],
+        thumbnail: require('@/assets/images/folio.png'),
+        thumbnailBorder: false,
+    },
+    {
         id: 'hired-assessments',
         name: "Hired Assessments",
         company: "for Vettery/Hired",
