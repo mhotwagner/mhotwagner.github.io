@@ -8,7 +8,7 @@ interface FooterProps {
 export default function Footer({style}: FooterProps) {
     return (
         <View style={[styles.footer, style]}>
-            <Text style={styles.footerText}>&copy; 2024 Michael Hotwagner</Text>
+            <Text style={styles.footerText}>&copy; 2025 Michael Hotwagner</Text>
         </View>
     );
 };

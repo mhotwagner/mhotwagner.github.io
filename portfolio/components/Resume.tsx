@@ -10,17 +10,17 @@ interface ResumeProps {
 export default function Resume({ setInputValue }: ResumeProps) {
     const handleDownload = async () => {
         if (Platform.OS === 'web') {
-            const pdfAsset = Asset.fromModule(require('@/assets/files/MichaelHotwagner2024.pdf'));
+            const pdfAsset = Asset.fromModule(require('@/assets/files/MichaelHotwagner2025.pdf'));
             await pdfAsset.downloadAsync();
             const link = document.createElement('a');
             link.href = pdfAsset.uri;
-            link.download = 'MichaelHotwagner2024.pdf';
+            link.download = 'MichaelHotwagner2025.pdf';
             link.click();
             setInputValue('resume downloaded')
         } else {
-            const url = FileSystem.documentDirectory + 'MichaelHotwagner2024.pdf';
+            const url = FileSystem.documentDirectory + 'MichaelHotwagner2025.pdf';
             FileSystem.downloadAsync(
-                require('@/assets/files/MichaelHotwagner2024.pdf'),
+                require('@/assets/files/MichaelHotwagner2025.pdf'),
                 url
             ).then(({ uri }) => {
                 FileSystem.getContentUriAsync(uri).then(cUri => {
