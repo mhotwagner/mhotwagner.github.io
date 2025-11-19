@@ -14,10 +14,10 @@ interface ContactLinksProps {
 export default function ContactLinks({ style, setInputValue, delay, hasVisitedBefore }: ContactLinksProps) {
     const [visible, setVisible] = React.useState(!delay);
     const contactLinks = [
-        { icon: 'envelope', action: () => copyToClipboard('mhotwagner@gmail.com', 'email copied to clipboard') },
-        { icon: 'phone', action: () => copyToClipboard('1-231-680-0608', 'phone copied to clipboard') },
-        { icon: 'github', url: 'https://github.com/mhotwagner' },
-        { icon: 'linkedin', url: 'https://www.linkedin.com/in/mhotwagner/' },
+        { icon: 'envelope', action: () => copyToClipboard('mhotwagner@gmail.com', 'email copied to clipboard'), alt: "copy email to clipboard" },
+        { icon: 'phone', action: () => copyToClipboard('1-231-680-0608', 'phone copied to clipboard'), alt: "copy phone to clipboard" },
+        { icon: 'github', url: 'https://github.com/mhotwagner', alt: "copy GitHub to clipboard" },
+        { icon: 'linkedin', url: 'https://www.linkedin.com/in/mhotwagner/', alt: "copy LinkedIn to clipboard" },
     ];
 
     const copyToClipboard = (text: string, message: string) => {
@@ -42,8 +42,9 @@ export default function ContactLinks({ style, setInputValue, delay, hasVisitedBe
                         key={index}
                         onPress={() => link.action ? link.action() : Linking.openURL(link.url)}
                         style={styles.contactLink}
+                        accessibilityLabel={link.alt}
                     >
-                        <FontAwesome name={link.icon} size={20} color="#00a86b" />
+                        <FontAwesome name={link.icon as any} size={20} color="#00a86b" />
                     </TouchableOpacity>
                 ))}
             </View> }
