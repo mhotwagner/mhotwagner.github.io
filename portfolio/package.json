@@ -1,7 +1,7 @@
 {
-  "name": "portfolio",
+  "name": "Michael Hotwagner",
   "main": "expo-router/entry",
-  "homepage": "https://mhotwagner.github.io/portfolio",
+  "homepage": "https://mhotwagner.github.io/",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
