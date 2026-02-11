@@ -1,5 +1,6 @@
 import { ScrollView, View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
+import Head from 'expo-router/head';
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -28,6 +29,10 @@ export default function RosendaleWoodbank() {
 
   return (
     <>
+      <Head>
+        <title>Rosendale Woodbank</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪵</text></svg>" />
+      </Head>
       <StatusBar style="light" />
       <ScrollView style={styles.page} contentContainerStyle={styles.pageContent}>
         {/* Hero */}
@@ -112,7 +117,7 @@ export default function RosendaleWoodbank() {
             </NeedCard>
           </Section>
 
-          <Section title="How It Would Work">
+          <Section title="How It Would (Wood) Work">
             <Text style={styles.body}>
               Wood is collected from local sources — tree services, storm cleanup, private
               landowners, and potentially state and county operations — and brought to the
