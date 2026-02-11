@@ -160,7 +160,7 @@ export default function RosendaleWoodbank() {
             </Text>
             <View style={styles.ctaContact}>
               <Text style={styles.ctaContactText}>
-                mhotwagner@gmail.com
+                rosendale.woodbank@gmail.com
               </Text>
             </View>
           </View>
